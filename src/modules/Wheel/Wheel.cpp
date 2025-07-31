@@ -1,8 +1,9 @@
 #include <Arduino.h>
+
 #include "Wheel.h"
 
 Wheel::Wheel(int enablePin, int positivePin, int negativePin)
-    : _enablePin(enablePin), _positivePin(positivePin), _negativePin(negativePin)
+    : Observer("Wheel"), _enablePin(enablePin), _positivePin(positivePin), _negativePin(negativePin)
 {
 }
 
@@ -21,7 +22,7 @@ void Wheel::stop()
   analogWrite(_enablePin, 0);
 }
 
-void Wheel::forward(int speed = 255)
+void Wheel::forward(int speed)
 {
   digitalWrite(_positivePin, HIGH);
   digitalWrite(_negativePin, LOW);
@@ -29,7 +30,7 @@ void Wheel::forward(int speed = 255)
   analogWrite(_enablePin, speed);
 }
 
-void Wheel::backward(int speed = 255)
+void Wheel::backward(int speed)
 {
   digitalWrite(_positivePin, LOW);
   digitalWrite(_negativePin, HIGH);

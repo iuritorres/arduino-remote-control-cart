@@ -1,7 +1,9 @@
-#ifndef WHEEL_H
-#define WHEEL_H
+#ifndef Wheel_h
+#define Wheel_h
 
-class Wheel
+#include <observer/Observer.h>
+
+class Wheel : public Observer
 {
 private:
   int _enablePin;
