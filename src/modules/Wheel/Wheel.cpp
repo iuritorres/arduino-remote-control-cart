@@ -3,8 +3,8 @@
 #include "Wheel.h"
 #include "../Controller/KeyCommand.h"
 
-Wheel::Wheel(char *name, int enablePin, int positivePin, int negativePin)
-    : Observer(name), _enablePin(enablePin), _positivePin(positivePin), _negativePin(negativePin)
+Wheel::Wheel(char *name, WheelSide side, int enablePin, int positivePin, int negativePin)
+    : Observer(name), _side(side), _enablePin(enablePin), _positivePin(positivePin), _negativePin(negativePin)
 {
 }
 
@@ -57,7 +57,12 @@ void Wheel::update(void *data)
     break;
 
   case KeyCommand::LEFT:
+    _side == LEFT ? stop() : forward();
+    break;
+
   case KeyCommand::RIGHT:
+    _side == RIGHT ? stop() : forward();
+    break;
 
   case KeyCommand::SQUARE:
   case KeyCommand::TRIANGLE:
