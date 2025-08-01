@@ -1,7 +1,6 @@
-#include <observer/Observer.h>
+#pragma once
 
-#ifndef Subject_h
-#define Subject_h
+#include <observer/Observer.h>
 
 class Subject
 {
@@ -17,5 +16,3 @@ public:
   void unsubscribe(Observer *observer);
   void notify(void *data);
 };
-
-#endif

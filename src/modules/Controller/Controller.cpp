@@ -3,23 +3,6 @@
 
 #include "Controller.h"
 
-const KeyMap Controller::keyActionMap[] = {
-    // DIRECTIONAL KEYS
-    {KeyAction::FORWARD, "F"},
-    {KeyAction::BACKWARD, "B"},
-    {KeyAction::LEFT, "L"},
-    {KeyAction::RIGHT, "R"},
-
-    // BUTTON KEYS
-    {KeyAction::SQUARE, "S"},
-    {KeyAction::TRIANGLE, "T"},
-    {KeyAction::CIRCLE, "C"},
-    {KeyAction::CROSS, "X"},
-
-    // ACTION KEYS
-    {KeyAction::START, "A"},
-    {KeyAction::PAUSE, "P"}};
-
 Controller::Controller(int rxPin, int txPin)
     : bluetooth(rxPin, txPin)
 {
@@ -38,10 +21,11 @@ void Controller::listen()
     Serial.print("Received command: ");
     Serial.println(command);
 
-    if (command)
+    if (!command)
     {
-      KeyAction action = static_cast<KeyAction>(command);
-      notify(&action);
+      return;
     }
+
+    notify(&command);
   }
 }

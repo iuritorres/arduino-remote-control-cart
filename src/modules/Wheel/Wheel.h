@@ -1,5 +1,4 @@
-#ifndef Wheel_h
-#define Wheel_h
+#pragma once
 
 #include <observer/Observer.h>
 
@@ -11,12 +10,12 @@ private:
   int _negativePin;
 
 public:
-  Wheel(int enablePin, int positivePin, int negativePin);
+  Wheel(char *name, int enablePin, int positivePin, int negativePin);
 
   void setupPins();
   void stop();
   void forward(int speed = 255);
   void backward(int speed = 255);
-};
 
-#endif
+  void update(void *data) override;
+};

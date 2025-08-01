@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "Observer.h"
 
-Observer::Observer(char *name) : _name(name)
+Observer::Observer(const char *name) : _name(name)
 {
 }
 

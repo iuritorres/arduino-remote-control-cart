@@ -1,9 +1,10 @@
 #include <Arduino.h>
 
 #include "Wheel.h"
+#include "../Controller/KeyCommand.h"
 
-Wheel::Wheel(int enablePin, int positivePin, int negativePin)
-    : Observer("Wheel"), _enablePin(enablePin), _positivePin(positivePin), _negativePin(negativePin)
+Wheel::Wheel(char *name, int enablePin, int positivePin, int negativePin)
+    : Observer(name), _enablePin(enablePin), _positivePin(positivePin), _negativePin(negativePin)
 {
 }
 
@@ -36,4 +37,43 @@ void Wheel::backward(int speed)
   digitalWrite(_negativePin, HIGH);
 
   analogWrite(_enablePin, speed);
+}
+
+void Wheel::update(void *data)
+{
+  char action = *static_cast<char *>(data);
+
+  Serial.print("Wheel update received action: ");
+  Serial.println(action);
+
+  switch (action)
+  {
+  case KeyCommand::FORWARD:
+    forward();
+    break;
+
+  case KeyCommand::BACKWARD:
+    backward();
+    break;
+
+  case KeyCommand::LEFT:
+  case KeyCommand::RIGHT:
+
+  case KeyCommand::SQUARE:
+  case KeyCommand::TRIANGLE:
+    break;
+
+  case KeyCommand::CIRCLE:
+    stop();
+    break;
+
+  case KeyCommand::CROSS:
+  case KeyCommand::START:
+  case KeyCommand::PAUSE:
+    break;
+
+  default:
+    stop();
+    break;
+  }
 }

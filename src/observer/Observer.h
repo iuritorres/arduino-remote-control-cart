@@ -1,15 +1,11 @@
-#ifndef Observer_h
-#define Observer_h
-
+#pragma once
 class Observer
 {
 private:
-  char *_name;
+  const char *_name;
 
 public:
-  Observer(char *name);
+  Observer(const char *name);
 
   virtual void update(void *data);
 };
-
-#endif
